@@ -1,3 +1,9 @@
+import {q, MOCKATRON_CONSTRAINT_AND, 
+    MOCKATRON_CONSTRAINT_TYPE_VALUE, 
+    MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ, 
+    MOCKATRON_CONSTRAINT_NULL,
+    MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT} from '../src/utils';
+
 const productList = `[
     {
         "id": "product1",
@@ -26,11 +32,7 @@ const searchResults = `[
     }
 ]`;
 
-const q = queryStr => `mq__${queryStr}`;
-const MOCKATRON_CONSTRAINT_AND = `mc__AND`;
-const MOCKATRON_CONSTRAINT_TYPE_VALUE = `mc__CONSTRAINT-TYPE-VALUE`;
-const MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ = `mc__CONSTRAINT-NOT-EQ`;
-const MOCKATRON_CONSTRAINT_NULL = `mc__CONSTRAINT-NULL`;
+
 
 exports.requests = `
     {
@@ -46,6 +48,7 @@ exports.requests = `
                     },
                     {
                         "constraint": {
+                            "type": "${MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT}"
                             "expression1": {
                                 "type": "${MOCKATRON_CONSTRAINT_TYPE_VALUE}",
                                 "value": "${q('search')}"
