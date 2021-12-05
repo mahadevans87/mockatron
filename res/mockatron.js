@@ -50,7 +50,7 @@ export.requests = `
                                 "type": "${MOCKATRON_CONSTRAINT_TYPE_VALUE}",
                                 "value": "${q('search')}",
                             },
-                            "operator": "${MOCKATRON_CONSTRAINT_CONDITION_NOT_NULL}",
+                            "operator": "${MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ}",
                             "expression2": {
                                 "type": "${MOCKATRON_CONSTRAINT_TYPE_VALUE}",
                                 value "${MOCKATRON_CONSTRAINT_NULL}",
