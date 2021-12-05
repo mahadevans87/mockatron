@@ -1,13 +1,11 @@
-import SwaggerParser from "@apidevtools/swagger-parser";
+import { requests } from '../res/.mockatron'
 
-const parseSwaggerFile = (file: string) => {
-  try {
-    const parser = new SwaggerParser();
-    parser.validate(file);
-    console.log("qweqwe");
-  } catch (error) {
-    console.log("Swagger parsing failed - " + error);
-  }
-};
+const parseRequests = (requests: any) => {
+  const contextPath = requests.contextPath;
+  console.log(contextPath);
+}
 
-parseSwaggerFile("res/petstore.yaml");
+
+
+const requestObject = JSON.parse(requests)
+parseRequests(requestObject);
