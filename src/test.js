@@ -2,7 +2,7 @@ import {q, MOCKATRON_CONSTRAINT_AND,
     MOCKATRON_CONSTRAINT_TYPE_VALUE, 
     MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ, 
     MOCKATRON_CONSTRAINT_NULL,
-    MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT} from '../src/utils';
+    MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT} from './utils/utils';
 
 const productList = `[
     {
@@ -34,7 +34,7 @@ const searchResults = `[
 
 
 
-exports.requests = `
+export const requests = `
     {
         "contextPath": "/api/mock",
         "routes": [
@@ -48,7 +48,7 @@ exports.requests = `
                     },
                     {
                         "constraint": {
-                            "type": "${MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT}"
+                            "type": "${MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT}",
                             "expression1": {
                                 "type": "${MOCKATRON_CONSTRAINT_TYPE_VALUE}",
                                 "value": "${q('search')}"

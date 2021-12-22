@@ -1,14 +1,14 @@
 export interface IConstraintExpression {
     type: string,
-    value: any
+    value: IConstraintExpression | string
 }
 
-
 export interface IConstraint {
-    expression1: IConstraint | IConstraintExpression,
-    operator: string,
-    expression2: IConstraint | IConstraintExpression,
-    type: string
+    expression1?: IConstraint,
+    operator?: string,
+    expression2?: IConstraint,
+    type: string,
+    value?: string
 }
 
 export interface IResponse {
