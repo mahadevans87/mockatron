@@ -1,0 +1,20 @@
+{
+  "name": "mockatron_server",
+  "version": "1.0.0",
+  "description": "Mock HTTP Server from Mockatron",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "express-async-router": "^0.1.15"
+  },
+  "devDependencies": {
+    "@types/node": "^8.10.66"
+  }
+}
