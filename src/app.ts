@@ -3,7 +3,7 @@ import { copyDir } from './utils/functions';
 import * as fs from "fs";
 
 import { IResponse, IRoute, IConstraint } from './models/IRoute';
-import { MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ, MOCKATRON_CONSTRAINT_NULL, MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT, MOCKATRON_CONSTRAINT_TYPE_VALUE } from './utils/utils';
+import { MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ, MOCKATRON_CONSTRAINT_UNDEFINED, MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT, MOCKATRON_CONSTRAINT_TYPE_VALUE } from './utils/utils';
 
 const parseExpressionValue = (expressionValue: string): string => {
   if (!expressionValue || expressionValue.length === 0) {
@@ -14,8 +14,8 @@ const parseExpressionValue = (expressionValue: string): string => {
   if (expressionValue.startsWith('mq__')) {
     return `req.query.${expressionValue.split('mq__')[1]}`
   }
-  if (expressionValue === MOCKATRON_CONSTRAINT_NULL) {
-    return `null`
+  if (expressionValue === MOCKATRON_CONSTRAINT_UNDEFINED) {
+    return `undefined`
   }
   return expressionValue;
 }
@@ -97,3 +97,4 @@ const buildPackage = (requests: any) => {
 //console.log(requests);
 const requestObject = JSON.parse(requests)
 buildPackage(requestObject);
+console.log("Done.");

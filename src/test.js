@@ -1,7 +1,7 @@
 import {q, MOCKATRON_CONSTRAINT_AND, 
     MOCKATRON_CONSTRAINT_TYPE_VALUE, 
     MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ, 
-    MOCKATRON_CONSTRAINT_NULL,
+    MOCKATRON_CONSTRAINT_UNDEFINED,
     MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT} from './utils/utils';
 
 const productList = `[
@@ -43,10 +43,6 @@ export const requests = `
                 "method": "GET",
                 "responses": [
                     {
-                        "statusCode": "200",
-                        "body": ${productList}
-                    },
-                    {
                         "constraint": {
                             "type": "${MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT}",
                             "expression1": {
@@ -56,12 +52,16 @@ export const requests = `
                             "operator": "${MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ}",
                             "expression2": {
                                 "type": "${MOCKATRON_CONSTRAINT_TYPE_VALUE}",
-                                "value": "${MOCKATRON_CONSTRAINT_NULL}"
+                                "value": "${MOCKATRON_CONSTRAINT_UNDEFINED}"
                             }
                         },
                         "statusCode": 200,
                         "body": ${searchResults}
-                    }
+                    },
+                    {
+                        "statusCode": "200",
+                        "body": ${productList}
+                    }                    
                 ]
             }
         ]
