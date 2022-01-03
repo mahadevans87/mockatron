@@ -1,6 +1,11 @@
-export const q = queryStr => `mq__${queryStr}`;
-export const MOCKATRON_CONSTRAINT_AND = `mc__AND`;
-export const MOCKATRON_CONSTRAINT_TYPE_VALUE = `mc__CONSTRAINT-TYPE-VALUE`;
-export const MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT = `mc__CONSTRAINT-TYPE-CONSTRAINT`;
-export const MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ = `mc__CONSTRAINT-NOT-EQ`;
-export const MOCKATRON_CONSTRAINT_UNDEFINED = `mc__CONSTRAINT-UNDEFINED`;
+export const MOCKATRON_CONSTRAINT_AND = 'and';
+export const MOCKATRON_CONSTRAINT_TYPE_VALUE = 'value';
+export const MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT = 'constraint';
+export const MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ = 'neq';
+export const MOCKATRON_CONSTRAINT_CONDITION_EQ = 'eq';
+export const MOCKATRON_CONSTRAINT_UNDEFINED = 'undefined';
+
+// Query param -> query('param')
+// Path param -> path('param')
+// Header param -> header('key')
+//

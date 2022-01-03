@@ -13,7 +13,7 @@ export interface IConstraint {
 
 export interface IResponse {
     statusCode: number,
-    body: any,
+    body: string,
     constraint?: IConstraint
 }
 

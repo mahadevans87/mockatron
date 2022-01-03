@@ -1,0 +1,60 @@
+{
+    "contextPath": "/api/mock",
+    "routes": [
+        {
+            "path": "/products",
+            "method": "GET",
+            "responses": [
+                {
+                    "constraint": {
+                        "type": "constraint",
+                        "expression1": {
+                            "type": "value",
+                            "value": "query(search)"
+                        },
+                        "operator": "neq",
+                        "expression2": {
+                            "type": "value",
+                            "value": "undefined"
+                        }
+                    },
+                    "statusCode": 200,
+                    "body": "def(productSearchNEQ)"
+                },
+                {
+                    "statusCode": "200",
+                    "body": "def(productDefault)"
+                }                    
+            ]
+        }
+    ],
+
+    "definitions": {
+        "productSearchNEQ": [
+            {
+                "id": "product10",
+                "name": "Product Ten"
+            },
+            {
+                "id": "product11",
+                "name": "Product Eleven"
+            }
+        ],
+        "productDefault": 
+            [
+                {
+                    "id": "product1",
+                    "name": "Product One"
+                },
+                {
+                    "id": "product2",
+                    "name": "Product Two"
+                },
+                {
+                    "id": "product3",
+                    "name": "Product Three"
+                }
+            
+            ]                
+    }
+}
