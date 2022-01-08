@@ -101,6 +101,5 @@ const buildPackage = (requests: any) => {
   fs.writeFileSync('./out/index.js', indexFileContent);
 }
 
-
 buildPackage(inputConfig);
 console.log("Done.");
