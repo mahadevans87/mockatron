@@ -1,9 +1,11 @@
 import  inputConfig from './test.json'
+
 import { copyDir } from './utils/functions';
 import * as fs from "fs";
 
 import { IResponse, IRoute, IConstraint } from './models/IRoute';
 import { MOCKATRON_CONSTRAINT_CONDITION_NOT_EQ, MOCKATRON_CONSTRAINT_UNDEFINED, MOCKATRON_CONSTRAINT_TYPE_CONSTRAINT, MOCKATRON_CONSTRAINT_TYPE_VALUE } from './utils/utils';
+import {TemplateParser} from './parsers/templateParser';
 
 const parseExpressionValue = (expressionValue: string): string => {
   if (!expressionValue || expressionValue.length === 0) {
@@ -101,5 +103,8 @@ const buildPackage = (requests: any) => {
   fs.writeFileSync('./out/index.js', indexFileContent);
 }
 
-buildPackage(inputConfig);
+const something = TemplateParser(fs.readFileSync('./src/test-copy.txt', 'utf-8'), null);
+console.log(something);
+
+//buildPackage(inputConfig);
 console.log("Done.");

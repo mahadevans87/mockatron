@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/mahadevans87/mockatron#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
