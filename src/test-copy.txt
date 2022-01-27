@@ -1,4 +1,4 @@
-"{
+{
     "contextPath": "/api/mock",
     "routes": [
         {
@@ -6,39 +6,13 @@
             "method": "GET",
             "responses": [
                 {
-                    "constraint": {
-                        "type": "constraint",
-                        "expression1": {
-                            "type": "value",
-                            "value": "query(search)"
-                        },
-                        "operator": "neq",
-                        "expression2": {
-                            "type": "value",
-                            "value": "undefined"
-                        }
-                    },
+                    "constraint": "{{{and 
+                                          (neq (query 'search') undefined) 
+                                          (gt (query 'price') 0)
+                                   }}}",
                     "statusCode": 200,
                     "body": "def(productSearchNEQ)"
-                },
-                {
-                    "statusCode": "200",
-                    "body": {
-                        "source": "def(productDefault)",
-                        "filter": {
-                            "expression1": {
-                                "type": "value",
-                                "value": "object.price"
-                            },
-                            "operator": "gt",
-                            "expression": {
-                                "type": "value",
-                                "value": "query(minPrice)"
-                            }                            
-                        }
-                    }
-                    
-                }                    
+                }
             ]
         }
     ],
@@ -47,9 +21,11 @@
         "productSearchNEQ": [
             {{#repeat 5 10}}
             {
-                "price": "{{float 20.0 40.0}}",
+                "price": "{{float -200 40.0}}",
+                "rating": {{int 1 5}},
                 "id": {{@index}}
-            },
+            }
             {{/repeat}}
         ]
-}"
+    }
+}

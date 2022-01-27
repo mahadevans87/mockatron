@@ -64,6 +64,22 @@ const TemplateParserImpl = (request: Request ) => {
             }
             return Math.random() * (options.max - options.min) + options.min;
         },
+
+        query: (queryStr: any) => {
+          return `req.query.${queryStr}`;
+        },
+        gt: (expr1: any, expr2: any) => {
+          return `${expr1} > ${expr2}`;
+        },
+        neq: (expr1: any, expr2: any) => {
+          return `${expr1} !== ${expr2}`;
+        },
+        and: (expr1: any, expr2: any) => {
+          return `(${expr1}) && (${expr2})`;
+        },
+        if: (expr1: any) => {
+          return `if ${expr1} {`
+        }
     }
 }
 

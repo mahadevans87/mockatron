@@ -56,7 +56,7 @@ const parseRouteResponse = (response: IResponse, definitions: any): string => {
   let routeResponse = '';
 
   if (response.constraint) {
-    routeResponse = `if ${parseConstraint(response.constraint)} {\n`;
+    routeResponse = `if ${response.constraint} {\n`;
   }
 
   // body can be in def(body) or file(body) -> this one is for the future if the JSON grows bigger
@@ -106,5 +106,5 @@ const buildPackage = (requests: any) => {
 const something = TemplateParser(fs.readFileSync('./src/test-copy.txt', 'utf-8'), null);
 console.log(something);
 
-//buildPackage(inputConfig);
+buildPackage(JSON.parse(something));
 console.log("Done.");
