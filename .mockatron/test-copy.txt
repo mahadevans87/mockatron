@@ -11,7 +11,7 @@
                                           (gt (query 'price') 0)
                                    }}}",
                     "statusCode": 200,
-                    "body": "def(productSearchNEQ)"
+                    "body": "{{{def 'products' 'productSearchNEQ'}}}"
                 }
             ]
         }

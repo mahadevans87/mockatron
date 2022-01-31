@@ -56,7 +56,7 @@ const parseRouteResponse = (response: IResponse, definitions: any): string => {
   let routeResponse = '';
 
   if (response.constraint) {
-    routeResponse = `if ${response.constraint} {\n`;
+    routeResponse = `if (${response.constraint}) {\n`;
   }
 
   // body can be in def(body) or file(body) -> this one is for the future if the JSON grows bigger
@@ -66,7 +66,7 @@ const parseRouteResponse = (response: IResponse, definitions: any): string => {
   }
 
 
-  routeResponse = `${routeResponse} return res.status(${response.statusCode}).json(${JSON.stringify(responseBody)}) \n`;
+  routeResponse = `${routeResponse} return res.status(${response.statusCode}).json(${responseBody}) \n`;
   if (response.constraint) {
     routeResponse = `${routeResponse}}\n`;
   }
@@ -91,7 +91,7 @@ const buildPackage = (requests: any) => {
   // Create a new directory and copy template files
   fs.existsSync('./out') ? fs.rmSync('./out', { recursive: true }) : console.log('out folder not found, copying files.');
   copyDir('./templates', './out');
-
+  copyDir('./.mockatron', './out/.mockatron');
   // Replace routes file
   let routesFileContent: string = fs.readFileSync('./out/router.js', 'utf-8');
   routesFileContent =  routesFileContent.replace('// Auto generated Code', routesString);
@@ -103,7 +103,7 @@ const buildPackage = (requests: any) => {
   fs.writeFileSync('./out/index.js', indexFileContent);
 }
 
-const something = TemplateParser(fs.readFileSync('./src/test-copy.txt', 'utf-8'), null);
+const something = TemplateParser(fs.readFileSync('./.mockatron/test-copy.txt', 'utf-8'), null);
 console.log(something);
 
 buildPackage(JSON.parse(something));

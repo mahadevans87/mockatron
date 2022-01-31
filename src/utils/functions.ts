@@ -2,13 +2,15 @@ import * as fs   from "fs";
 import * as path from "path";
 
 export const copyDir  = (src, dest) => {
-    fs.mkdirSync(dest);
-    let entries = fs.readdirSync(src);
+    if (!fs.existsSync(dest)) {
+        fs.mkdirSync(dest);
+    }
+    const entries = fs.readdirSync(src, {withFileTypes: true});
 
-    for (let entry of entries) {
-        let srcPath = path.join(src, entry);
-        let destPath = path.join(dest, entry);
+    for (const entry of entries) {
+        const srcPath = path.join(src, entry.name);
+        const destPath = path.join(dest, entry.name);
         // Assuming no folders for now
-        fs.copyFileSync(srcPath, destPath);
+        entry.isDirectory() ? copyDir(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
     }
 }
