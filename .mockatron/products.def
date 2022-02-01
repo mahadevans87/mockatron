@@ -1,9 +1,17 @@
-[
-    {{#repeat 5 20}}
-    {
+{
+    "productSearchNEQ": [
+            {{#repeat 5 20}}
+            {
+                "price": "{{float 50.0 5000.0}}",
+                "rating": {{int 1 5}},
+                "id": {{@index}}
+            }
+            {{/repeat}}
+    ],
+
+    "productDetail": {
         "price": "{{float 50.0 5000.0}}",
         "rating": {{int 1 5}},
-        "id": {{@index}}
-    }
-    {{/repeat}}
-]
+        "id": {{int 1000 2000}}
+    }    
+}

@@ -81,7 +81,11 @@ const TemplateParserImpl = (request: Request ) => {
           return `if ${expr1} {`
         },
         def: (filename: string, objectName: string) => {
-          return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8')))`
+          if (objectName) {
+            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8')))['${objectName}']`
+          } else {
+            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8')))`
+          }
         }
     }
 }

@@ -103,7 +103,7 @@ const buildPackage = (requests: any) => {
   fs.writeFileSync('./out/index.js', indexFileContent);
 }
 
-const something = TemplateParser(fs.readFileSync('./.mockatron/test-copy.txt', 'utf-8'), null);
+const something = TemplateParser(fs.readFileSync('./.mockatron/main.json', 'utf-8'), null);
 console.log(something);
 
 buildPackage(JSON.parse(something));

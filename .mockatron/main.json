@@ -12,20 +12,24 @@
                                    }}}",
                     "statusCode": 200,
                     "body": "{{{def 'products' 'productSearchNEQ'}}}"
+                },
+                {
+                    "body": "'no results found'",
+                    "statusCode": 200
+                }
+            ]
+        },
+        {
+            "path": "/products/:id",
+            "method": "GET",
+            "responses": [
+                {
+                    "statusCode": 200,
+                    "body": "{{{def 'products' 'productDetail'}}}"
                 }
             ]
         }
-    ],
+    ]
 
-    "definitions": {
-        "productSearchNEQ": [
-            {{#repeat 5 10}}
-            {
-                "price": "{{float -200 40.0}}",
-                "rating": {{int 1 5}},
-                "id": {{@index}}
-            }
-            {{/repeat}}
-        ]
-    }
+
 }
