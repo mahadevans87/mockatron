@@ -12,6 +12,8 @@
     "productDetail": {
         "price": "{{float 50.0 5000.0}}",
         "rating": {{int 1 5}},
-        "id": {{int 1000 2000}}
+        "id": "{{pathValue 'id'}}",
+        "name": "{{word 2}}",
+        "description": "{{paragraph 3}}"
     }    
 }

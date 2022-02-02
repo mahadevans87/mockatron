@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const jsonParser = require("body-parser").json();
-const {TemplateParser} = require('./templateParser');
+const {TemplateParser} = require('./parsers/templateParser');
 const fs = require("fs");
 
 const router = Router();

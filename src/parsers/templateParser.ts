@@ -1,8 +1,8 @@
-import { randomInt } from 'crypto';
+import { randomInt, randomUUID } from 'crypto';
 import {Request} from 'express';
 import { EOL } from 'os';
 import { compile as hbsCompile } from 'handlebars';
-
+import { generateParagraphs, generateWords, generateSentences } from '../utils/stringGenerator';
 const TemplateParserImpl = (request: Request ) => {
 
     return {
@@ -39,6 +39,12 @@ const TemplateParserImpl = (request: Request ) => {
             }
             return content;
         },
+
+        word: (count: number) => generateWords(count),
+        sentence: (count: number) => generateSentences(count),
+        paragraph: (count: number) => generateParagraphs(count),
+
+        boolean: () => Math.random() < 0.5,
         int: (...args) => {
             const options: { min?: number; max?: number; precision?: number } = {
              precision: 1
@@ -68,23 +74,54 @@ const TemplateParserImpl = (request: Request ) => {
         query: (queryStr: any) => {
           return `req.query.${queryStr}`;
         },
+        path: (pathStr: any) => {
+          return `req.path.${pathStr}`;
+        },
+        body: (bodyStr: any) => {
+          return `req.body.${bodyStr}`;
+        },
+
+        queryValue: (queryStr: any) => {
+          return request.query[`${queryStr}`];
+        },
+        pathValue: (pathValue: any) => {
+          return request.params[`${pathValue}`];
+        },
+        bodyValue: (bodyValue: any) => {
+          return request.body[`${bodyValue}`];
+        },
+
         gt: (expr1: any, expr2: any) => {
           return `${expr1} > ${expr2}`;
+        },
+        lt: (expr1: any, expr2: any) => {
+          return `${expr1} < ${expr2}`;
         },
         neq: (expr1: any, expr2: any) => {
           return `${expr1} !== ${expr2}`;
         },
+        eq: (expr1: any, expr2: any) => {
+          return `${expr1} === ${expr2}`;
+        },
+
         and: (expr1: any, expr2: any) => {
           return `(${expr1}) && (${expr2})`;
         },
+        or: (expr1: any, expr2: any) => {
+          return `(${expr1}) || (${expr2})`;
+        },
+
         if: (expr1: any) => {
           return `if ${expr1} {`
         },
+
+        uuid: () => randomUUID(),
+
         def: (filename: string, objectName: string) => {
           if (objectName) {
-            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8')))['${objectName}']`
+            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8'), req))['${objectName}']`
           } else {
-            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8')))`
+            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8'), req))`
           }
         }
     }
