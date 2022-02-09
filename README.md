@@ -25,7 +25,7 @@ ${cwd}/.mockatron\n
 
 ## The main.json file
 
-Here is an example main.json file
+Here is an example of a simple `main.json` file
 
 ```
 {
@@ -92,7 +92,7 @@ Each object in the `responses` array should define the following keys -
 
 ## Dynamic Resource definitions
 
-Here is a simple example of a `products.json`
+Here is a simple example of a `products.json` file
 
 ```
 {
@@ -111,7 +111,7 @@ Here is a simple example of a `products.json`
 }
 ```
 
-The `productSearch` object was referenced in one of the responses in main.json. Mockatron will evaluate this response template each time it encounters the particular route and constraint and generates a random response based on the template. A complete list of helpers is defined below.
+The `productSearch` object was referenced in one of the responses above in the main.json file. Mockatron will evaluate this response template each time it encounters the particular route and constraint and generates a random response based on the template. A complete list of helpers is defined below.
 
 ## Static Resource Definitions
 
