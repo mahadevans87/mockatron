@@ -7,7 +7,7 @@ const TemplateParserImpl = (request: Request ) => {
 
     return {
         // repeat helper from Dummy JSON library
-        repeat: (min: number, max: number, options: any) => {
+        array: (min: number, max: number, options: any) => {
             let content = '';
             let count = 0;
             const data = { ...options };
@@ -119,9 +119,9 @@ const TemplateParserImpl = (request: Request ) => {
 
         def: (filename: string, objectName: string) => {
           if (objectName) {
-            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8'), req))['${objectName}']`
+            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.json', 'utf-8'), req))['${objectName}']`
           } else {
-            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8'), req))`
+            return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.json', 'utf-8'), req))`
           }
         }
     }

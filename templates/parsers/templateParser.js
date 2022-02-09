@@ -108,10 +108,10 @@ const TemplateParserImpl = (request) => {
         uuid: () => (0, crypto_1.randomUUID)(),
         def: (filename, objectName) => {
             if (objectName) {
-                return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8'), req))['${objectName}']`;
+                return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.json', 'utf-8'), req))['${objectName}']`;
             }
             else {
-                return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.def', 'utf-8'), req))`;
+                return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.json', 'utf-8'), req))`;
             }
         }
     };
