@@ -1,5 +1,5 @@
 # Mockatron
-Mockatron is a simple tool that helps front-end developers and testers setup a quick Mock HTTP API Server without having to write a backend API.
+Mockatron is a simple tool that helps front-end developers and testers setup a quick Mock HTTP API Server without having to write any backend code.
 
 By defining a simple set of configuration rules, you can stand up a mock HTTP server that can return static as well as dynamic response data.
 
