@@ -10,15 +10,17 @@ NPM package coming soon!
 
 # Usage
 
+`mockatron build --dir <directory-name>`
+
 Create a folder named `.mockatron` in the current working directory. The folder should contain a `main.json` and subsequent json files for resource definitions.
 
 Consider a simple example: 
 
 ``
-${cwd}/.mockatron
-    --> main.json
-    --> products.json
-    --> static-products.json
+${cwd}/.mockatron\
+    --> main.json\
+    --> products.json\
+    --> static-products.json\
 ``
 
 ## main.json
