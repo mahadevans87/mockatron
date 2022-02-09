@@ -28,6 +28,16 @@
                     "body": "{{{def 'products' 'productDetail'}}}"
                 }
             ]
+        },
+        {
+            "path": "/static-product",
+            "method": "GET",
+            "responses": [
+                {
+                    "statusCode": 200,
+                    "body": "{{{file 'static-products'}}}"
+                }
+            ]
         }
     ]
 

@@ -8,7 +8,7 @@ const stringGenerator_1 = require("../utils/stringGenerator");
 const TemplateParserImpl = (request) => {
     return {
         // repeat helper from Dummy JSON library
-        repeat: (min, max, options) => {
+        array: (min, max, options) => {
             let content = '';
             let count = 0;
             const data = Object.assign({}, options);
@@ -112,6 +112,14 @@ const TemplateParserImpl = (request) => {
             }
             else {
                 return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.json', 'utf-8'), req))`;
+            }
+        },
+        file: (filename) => {
+            if (filename) {
+                return `JSON.parse(fs.readFileSync('./.mockatron/' + '${filename}' + '.json', 'utf-8'))`;
+            }
+            else {
+                throw new Error("filename not found in arg");
             }
         }
     };

@@ -123,6 +123,13 @@ const TemplateParserImpl = (request: Request ) => {
           } else {
             return `JSON.parse(TemplateParser(fs.readFileSync('./.mockatron/' + '${filename}' + '.json', 'utf-8'), req))`
           }
+        },
+        file: (filename: string) => {
+          if (filename) {
+            return `JSON.parse(fs.readFileSync('./.mockatron/' + '${filename}' + '.json', 'utf-8'))`
+          } else {
+            throw new Error("filename not found in arg");
+          }
         }
     }
 }
