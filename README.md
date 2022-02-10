@@ -1,8 +1,14 @@
+
 # Mockatron
+
 Mockatron is a simple tool that helps front-end developers and testers setup a quick Mock HTTP API Server without having to write any backend code.
 
 By defining a simple set of configuration rules, you can stand up a mock HTTP server that can return static as well as dynamic response data.
 
+- Configure API Routes by defining constraints 
+- JSON style configuration for requests and responses
+- Handlebars style templating to support generation of responses from templates. Support for static responses are also available.
+- Enable Proxying to mock only specific routes and redirect others to your actual web server.
 
 # Install
 
