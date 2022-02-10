@@ -1,7 +1,8 @@
-# Mockatron
 <p align="center">
-    ![Alt text](res/logo.png?raw=true "Mockatron")
+    <img src="res/logo.png" width="377" />
 </p>
+
+# Mockatron
 
 Mockatron is a simple tool that helps front-end developers and testers setup a quick Mock HTTP API Server without having to write any backend code.
 
