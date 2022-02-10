@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const router = require("./router");
+var bodyParser = require('body-parser')
+var proxy = require('express-http-proxy');
 
-app.use("/context-path", router);
+app.use("/api/mock", bodyParser.json(), router);
 
-//app.use(errorHandler());
+// PROXYING_SUPPORT
+//app.use(proxy('https://www.google.com'));
 
 
 const port = process.env.PORT || "8080";

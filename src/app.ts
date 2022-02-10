@@ -52,6 +52,10 @@ const buildPackage = (requests: any) => {
   // Replace main file
   let indexFileContent: string = fs.readFileSync('./out/index.js', 'utf-8');
   indexFileContent = indexFileContent.replace('/context-path', contextPath);
+  if (requests.proxy) {
+    const proxyString = `app.use(proxy('${requests.proxy}'))`;
+    indexFileContent = indexFileContent.replace('// PROXYING_SUPPORT', proxyString)
+  }
   fs.writeFileSync('./out/index.js', indexFileContent);
 }
 

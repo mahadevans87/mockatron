@@ -1,5 +1,6 @@
 {
     "contextPath": "/api/mock",
+    "proxy": "https://github.com",
     "routes": [
         {
             "path": "/products",
