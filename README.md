@@ -17,11 +17,11 @@ By defining a simple set of configuration rules, you can stand up a mock HTTP se
 
 NPM package coming soon! To build locally type the following command from the root directory - 
 
-`npm install --global .` 
+`$ npm install --global .` 
 
 # Usage
 
-`mockatron --config /path/to/.mockatron --out /destination/folder`
+`$ mockatron --config /path/to/.mockatron --out /destination/folder`
 
 Create a folder named `.mockatron` in the current working directory. The folder should contain a `main.json` and other json files for resource definitions.
 
