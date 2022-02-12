@@ -15,21 +15,23 @@ By defining a simple set of configuration rules, you can stand up a mock HTTP se
 
 # Install
 
-NPM package coming soon!
+NPM package coming soon! To build locally type the following command from the root directory - 
+
+`npm install --global .` 
 
 # Usage
 
-`mockatron build --dir <directory-name>`
+`mockatron --config /path/to/.mockatron --out /destination/folder`
 
 Create a folder named `.mockatron` in the current working directory. The folder should contain a `main.json` and other json files for resource definitions.
 
 Consider a simple example: 
 
 ```
-${cwd}/.mockatron\n
-    --> main.json\n
-    --> products.json\n  
-    --> static-products.json\n
+${cwd}/.mockatron
+    --> main.json
+    --> products.json
+    --> static-products.json
 ```
 
 ## The main.json file
