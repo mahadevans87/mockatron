@@ -23,6 +23,14 @@ NPM package coming soon! To build locally type the following command from the ro
 
 `$ mockatron --config /path/to/.mockatron --out /destination/folder`
 
+Once the mock server is generated, `cd` to the output directory.
+
+`$ npm i`   
+`$ npm start`
+
+
+# The .mockatron configuration folder
+
 Create a folder named `.mockatron` in the current working directory. The folder should contain a `main.json` and other json files for resource definitions.
 
 Consider a simple example: 
