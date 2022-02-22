@@ -1,7 +1,7 @@
 import { randomInt, randomUUID } from 'crypto';
 import { Request } from 'express';
 import { EOL } from 'os';
-import { compile as hbsCompile } from 'handlebars';
+import handlebars from 'handlebars';
 import {
   generateParagraphs,
   generateWords,
@@ -101,9 +101,17 @@ const TemplateParserImpl = (request: Request) => {
       return `${expr1} < ${expr2}`;
     },
     neq: (expr1: any, expr2: any) => {
+      if (typeof expr2 === 'string') {
+        expr2 = `'${expr2}'`;
+      }
+
       return `${expr1} !== ${expr2}`;
     },
     eq: (expr1: any, expr2: any) => {
+      if (typeof expr2 === 'string') {
+        expr2 = `'${expr2}'`;
+      }
+
       return `${expr1} === ${expr2}`;
     },
 
@@ -139,7 +147,7 @@ const TemplateParserImpl = (request: Request) => {
 
 export const TemplateParser = (content: string, request: Request): string => {
   try {
-    return hbsCompile(content)(null, {
+    return handlebars.compile(content, { noEscape: true })(null, {
       helpers: TemplateParserImpl(request),
     });
   } catch (error) {

@@ -1,7 +1,22 @@
 {
-    "contextPath": "/api/mock",
-    "proxy": "https://github.com",
+    "contextPath": "/financials/v1",
+    "proxy": "http://localhost:8081",
     "routes": [
+        {
+            "path":"/freight-bills/:id",
+            "method": "GET",
+            "responses": [
+                {
+                    "constraint": "{{{ and (neq (path 'id') undefined)
+                                           (neq (path 'id') 'grid-view') 
+                                    }}}",
+                   "statusCode": "200",
+                   "body": "{{{file 'freight-bills'}}}"
+                }
+
+            ]
+
+        },
         {
             "path": "/products",
             "method": "GET",
