@@ -131,6 +131,14 @@ const TemplateParserImpl = (request) => {
                 throw new Error('filename not found in arg');
             }
         },
+        proxy: (host) => {
+            if (host) {
+                return new handlebars_1.default.SafeString(`proxy('${host}', {proxyReqPathResolver: (req) => { return req.originalUrl; }, })(req, res);`);
+            }
+            else {
+                throw new Error('host not found');
+            }
+        },
     };
 };
 const TemplateParser = (content, request) => {

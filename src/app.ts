@@ -13,16 +13,14 @@ const parseRouteResponse = (response: IResponse, definitions: any): string => {
   }
 
   // body can be in def(body) or file(body) -> this one is for the future if the JSON grows bigger
-  let responseBody = response.body;
-  if (response.body.startsWith('def(')) {
-    responseBody = definitions[response.body.slice(4, -1)];
+  if (response.body.startsWith('proxy(')) {
+    routeResponse = `${routeResponse} return ${response.body} \n`;
+  } else {
+    routeResponse = `${routeResponse} return res.status(${response.statusCode}).json(${response.body}) \n`;
   }
-
-  routeResponse = `${routeResponse} return res.status(${response.statusCode}).json(${responseBody}) \n`;
   if (response.constraint) {
     routeResponse = `${routeResponse}}\n`;
   }
-
   return routeResponse;
 };
 
@@ -35,7 +33,7 @@ const parseRoute = (route: IRoute, definitions: any) => {
   );
   return `router.${route.method.toLowerCase()}('${
     route.path
-  }', (req, res) => {${routeContents}});`;
+  }', jsonParser,  (req, res) => {${routeContents}});`;
 };
 
 const parseRoutes = (routes: any, definitions: any) =>

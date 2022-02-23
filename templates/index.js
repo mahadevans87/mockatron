@@ -2,13 +2,12 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const router = require('./router');
-var bodyParser = require('body-parser');
 var proxy = require('express-http-proxy');
 var cors = require('cors');
 
 app.use(cors());
 
-app.use('CONTEXT_PATH', bodyParser.json(), router);
+app.use('CONTEXT_PATH', router);
 
 // PROXYING_SUPPORT
 //app.use(proxy('https://www.google.com'));
