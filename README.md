@@ -15,7 +15,9 @@ By defining a simple set of configuration rules, you can stand up a mock HTTP se
 
 # Install
 
-NPM package coming soon! To build locally type the following command from the root directory - 
+npm i --global mockatron
+
+To build locally type the following command from the root directory - 
 
 `$ npm install --global .` 
 
