@@ -1,6 +1,6 @@
 {
   "name": "mockatron",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "description": "Mock server for REST APIs",
   "main": "dist/src/app.js",
   "bin": {
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/mahadevans87/mockatron.git"
   },
   "author": "Mahadevan Sreenivasan",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mahadevans87/mockatron/issues"
   },
