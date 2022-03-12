@@ -1,7 +1,7 @@
 {
   "name": "mockatron_server",
   "version": "1.0.0",
-  "description": "Mock HTTP Server from Mockatron",
+  "description": "Mockatron is a simple tool that helps front-end developers and testers setup a quick Mock HTTP API Server without having to write any backend code",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
