@@ -113,7 +113,7 @@ Each object in the `responses` array should define the following keys -
 
 ## Dynamic Resource definitions
 
-Here is a simple example of a `products.json` file
+Here is a simple example of a `products.json` file that should reside in the same directory as the main.json file.
 
 ```
 {
@@ -132,11 +132,29 @@ Here is a simple example of a `products.json` file
 }
 ```
 
-The `productSearch` object was referenced in one of the responses above in the `main.json` file. Mockatron will evaluate this response template each time it encounters the particular route and constraint and generates a random response based on the template. A complete list of helpers is defined below.
+The `productSearch` object was referenced in one of the route responses above in the `main.json` file. Mockatron will evaluate this response template each time it encounters the particular route and constraint and generates a random response based on the template. A complete list of helpers is defined below.
+
+To use the above `productSearch` definition in `main.json`, use the `def` helper like so - 
+
+```
+{
+    "path": "/products/:id",
+    "method": "GET",
+    "responses": [
+        {
+            "statusCode": 200,
+            "body": "{{{def 'products' 'productSearch'}}}"
+        }
+    ]
+},
+```
 
 ## Static Resource Definitions
 
-Static resource can be literally any JSON file that needs to be returned each time the request matches the resource. No computation or random data is generated in this case. The file is returned as-is when the particular constraint matches.
+Static resource can be literally any JSON file that needs to be returned each time the request matches the resource. No computation or random data is generated in this case. The file is returned as-is when the particular constraint matches. 
+
+Create a file named 'static-products.json` for the above example and put it in the same directory as the main.json file.
+
 
 ```
 {
@@ -149,13 +167,154 @@ Static resource can be literally any JSON file that needs to be returned each ti
 } 
 ```
 
+To use the above file inside a route response, specify it in the `body` key using the`file` helper.
+```
+{
+            "path": "/static-product",
+            "method": "GET",
+            "responses": [
+                {
+                    "statusCode": 200,
+                    "body": "{{{file 'static-products'}}}"
+                }
+            ]
+        }
+```
+
+
+## Proxy requests to another server
+
+Mockatron can act as a proxy server on top of your regular backend API server. This can be a powerful tool if you want to mock APIs partially while proxying other requests to a backend server.
+
+### Setup a global proxy 
+
+In the main.json file's root element, add a `proxy` key and specify the host name to proxy any requests that do not match in the `routes` section. For example - 
+
+```
+{
+    "contextPath": "/api/mockatron",
+    "proxy": "http://localhost:8081",
+    "routes": [...],
+}
+```
+
+If Mockatron cannot find a matching route in the `routes` array, it will proxy the request to the host specfied in the `proxy` section (in this case http://localhost:8081. 
+
+### Setup route specfic proxies
+
+Sometimes you may want to proxy to an external API server for specific routes and may not always want to fallback to the global proxy as defined above. In such cases use the `{{proxy <host_name>}}` constraint in the `body` key. As an example - 
+
+```
+{
+    "contextPath": "/api/mockatron",
+    "routes": [
+            "path": "/login",
+            "method": "GET",
+            "responses":[
+                "body": "{{ proxy auth.github.com }}
+            ]
+    ]
+}
+``` 
+
+In the above example, the `/api/mockatron/login` GET request will be proxied to `auth.github.com`
+
+
+
 # Available Constraint Helpers 
 
-To be filled
+Here is a list of constraint helpers that can be used to perform conditional selection of a route based on a request's query param, path param, body param.
+You can build a complex constraint by combining several expressions together.
+
+`{{ query query_param }}` - This can be used in conjunction while conditionally checking for the query param named `query_param`
+
+`{{ path path_param }}`   - This can be used in conjunction while conditionally checking for the path param named `path_param`
+
+`{{ body body_param }}`   - This can be used in conjunction while conditionally checking for the body param named `body_param`. The body *must be a json*
+
+`{{ gt expr1 expr2 }}`    - Check if `expr1 > expr2` 
+
+`{{ lt expr1 expr2 }}`    - Check if `expr1 < expr2` 
+
+`{{ eq expr1 expr2 }}`    - Check if `expr1 == expr2` 
+
+`{{ neq expr1 expr2 }}`   - Check if `expr1 != expr2` 
+
+`{{ and expr1 expr2 }}`   - Check if `expr1 && expr2` 
+
+`{{ or expr1 expr2 }}`    - Check if `expr1 || expr2` 
+
+
+An example of putting it all together - 
+
+```
+"constraint": "{{{and 
+                    (neq (query 'search') undefined) 
+                    (gt (query 'price') 0)
+               }}}"
+```               
+The above constraint basically can be translated like so - `if ((request.query.search != undefined) && (request.query.price > 0))`. Only if this constraint is met, the route response will be evaluated. 
 
 # Available Response Helpers
 
-To be filled
+Here is a list of response helpers that can be used to build dynamic responses each time a route is called.
+
+`{{ int min max }}`         - Generate a random integer between min and max
+
+`{{ float min max }}`       - Generate a random float between min and max
+
+`{{ boolean }}`             - Generate a random boolean  
+
+`{{ word count }}`          - Generate random words based on the count. This can be used for string keys in responses. 
+
+`{{ sentence count }}`      - Generate random sentences based on the count. This can be used for string keys in responses. 
+
+`{{ paragraph count }}`     - Generate random paragraph based on the count. This can be used for string keys in responses. 
+
+`{{ uuid }}`                - Generate a random uuid 
+
+`{{ array min max }}`       - Generate an array of objects based on the enclosing object. The count of the array is a random number between min and max. 
+
+`{{ queryValue query_param }}` - Use the query_param value passed in the request in the response 
+
+`{{ pathValue path_param }}` - Use the path_param value passed in the request in the response 
+
+`{{ bodyValue body_param }}` - Use the body_param value passed in the request in the response  
+
+
+Putting it all together, here is an example - 
+
+Create a `products.json` file that would contain dynamic response definitions. Let's assume we have a `productDetail` definition that we will use for a route.
+
+```
+{
+     "productDetail": {
+        "price": "{{float 50.0 5000.0}}",
+        "rating": {{int 1 5}},
+        "id": "{{pathValue 'id'}}",
+        "name": "{{word 2}}",
+        "description": "{{paragraph 3}}",
+        "randomId": "{{uuid}}"
+     }   
+}
+```
+
+To use the above `productDetail` definition in `main.json`, use the `def` helper like so - 
+
+```
+{
+    "path": "/products/:id",
+    "method": "GET",
+    "responses": [
+        {
+            "statusCode": 200,
+            "body": "{{{def 'products' 'productDetail'}}}"
+        }
+    ]
+},
+```
+
+
 
 # TODO
 1. Allow filtering output for array definitions e.g filter -> item => item.amount > 10 && item.amount < 20
