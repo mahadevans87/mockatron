@@ -15,7 +15,7 @@ By defining a simple set of configuration rules, you can stand up a mock HTTP se
 
 # Install
 
-npm i --global mockatron
+`npm i --global mockatron`
 
 To build locally type the following command from the root directory - 
 
