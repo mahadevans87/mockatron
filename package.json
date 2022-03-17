@@ -1,10 +1,10 @@
 {
   "name": "mockatron",
-  "version": "0.1.4",
+  "version": "0.1.8",
   "description": "Mock server for REST APIs",
   "main": "dist/src/app.js",
   "bin": {
-    "mockatron": "dist/src/index.js"
+    "mockatron": "dist/src/run.js"
   },
   "scripts": {
     "start": "tsc && node dist/src/app.js",
