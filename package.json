@@ -1,6 +1,6 @@
 {
   "name": "mockatron",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "Mock server for REST APIs",
   "main": "dist/src/app.js",
   "bin": {
