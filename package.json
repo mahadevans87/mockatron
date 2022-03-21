@@ -1,10 +1,10 @@
 {
   "name": "mockatron",
-  "version": "0.1.4",
+  "version": "0.1.8",
   "description": "Mock server for REST APIs",
   "main": "dist/src/app.js",
   "bin": {
-    "mockatron": "dist/src/index.js"
+    "mockatron": "dist/src/run.js"
   },
   "scripts": {
     "start": "tsc && node dist/src/app.js",
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/mahadevans87/mockatron#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "get-installed-path": "^4.0.8",
     "handlebars": "^4.7.7",
     "lorem-ipsum": "^2.0.4",
     "ts-node": "^10.5.0",

@@ -1,6 +1,7 @@
 import { copyDir } from './utils/functions';
 import * as fs from 'fs';
 import path from 'path';
+import { getInstalledPathSync } from 'get-installed-path';
 
 import { IResponse, IRoute } from './models/IRoute';
 import { TemplateParser } from './parsers/templateParser';
@@ -53,7 +54,15 @@ const buildPackage = (
   fs.existsSync(outputFolder)
     ? fs.rmSync(outputFolder, { recursive: true })
     : console.log('out folder not found, copying files.');
-  copyDir('./templates', outputFolder);
+
+  // Copy templates
+  let templatesFolder = getInstalledPathSync('mockatron');
+  if (!templatesFolder || templatesFolder === '') {
+    // In case of running mockatron from source locally
+    templatesFolder = '.';
+  }
+  copyDir(path.join(templatesFolder, 'templates'), outputFolder);
+
   copyDir(configFolder, path.join(outputFolder, '.mockatron'));
   // Replace routes file
   let routesFileContent: string = fs.readFileSync(
