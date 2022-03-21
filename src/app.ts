@@ -83,11 +83,13 @@ const buildPackage = (
 };
 
 export const buildMock = (configFolder: string, outputFolder: string) => {
+  console.log('Beging parsing configuration files...');
+
   const parsedMockatronTemplate = TemplateParser(
     fs.readFileSync(path.join(configFolder, 'main.json'), 'utf-8'),
     null
   );
-  console.log(parsedMockatronTemplate);
+  console.log(`Generate Mock server in ${outputFolder}`);
   buildPackage(JSON.parse(parsedMockatronTemplate), configFolder, outputFolder);
-  console.log('Done.');
+  console.log('Done. Go to the output folder and run - npm i && npm start');
 };
